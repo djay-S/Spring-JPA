@@ -13,11 +13,11 @@ public class CourseJdbcRepository {
     private JdbcTemplate springJdbcTemplate;
 
     public void insertByHardCodedSQLQuery() {
-        springJdbcTemplate.update("insert into COURSE values (1, 'Learn Spring Data', 'Udemy')");
+        springJdbcTemplate.update("insert into COURSE (id, name, author) values (1, 'Learn Spring Data', 'Udemy')");
     }
 
     public void insertByCoursePOJO(Course course) {
-        springJdbcTemplate.update("insert into course values (?, ?, ?)", course.getId(), course.getName(), course.getAuthor());
+        springJdbcTemplate.update("insert into course (id, name, author) values (?, ?, ?)", course.getId(), course.getName(), course.getAuthor());
     }
 
     public void deleteByCourseId(int courseId) {
