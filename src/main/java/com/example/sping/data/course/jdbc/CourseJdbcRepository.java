@@ -2,6 +2,7 @@ package com.example.sping.data.course.jdbc;
 
 import com.example.sping.data.course.Course;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +20,11 @@ public class CourseJdbcRepository {
         springJdbcTemplate.update("insert into course values (?, ?, ?)", course.getId(), course.getName(), course.getAuthor());
     }
 
-    public void deleteByIdUsingSpringJDBC(int courseId) {
+    public void deleteByCourseId(int courseId) {
         springJdbcTemplate.update("delete from course where id = ?", courseId);
+    }
+
+    public Course selectCourseByCourseId(int courseId) {
+        return springJdbcTemplate.queryForObject("select * from course where id = ?", new BeanPropertyRowMapper<>(Course.class), courseId);
     }
 }

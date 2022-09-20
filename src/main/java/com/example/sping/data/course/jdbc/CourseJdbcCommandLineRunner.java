@@ -19,6 +19,10 @@ public class CourseJdbcCommandLineRunner implements CommandLineRunner {
         repository.insertByCoursePOJO(new Course(3, "Learn Spring Data Spring JDBC", "Udemy"));
         repository.insertByCoursePOJO(new Course(4, "Learn Spring Data Spring JPA", "Udemy"));
 
-        repository.deleteByIdUsingSpringJDBC(4);
+        repository.deleteByCourseId(4);
+
+        System.out.println(repository.selectCourseByCourseId(1));
+        System.out.println(repository.selectCourseByCourseId(2));
+        System.out.println(repository.selectCourseByCourseId(3));
     }
 }
