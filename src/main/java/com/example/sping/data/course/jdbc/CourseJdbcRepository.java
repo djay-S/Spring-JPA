@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 public class CourseJdbcRepository {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private JdbcTemplate springJdbcTemplate;
 
     private static String insertQuery = "insert into COURSE values (1, 'Learn Spring Data', 'Udemy')";
 
     public void insert() {
-        jdbcTemplate.update(insertQuery);
+        springJdbcTemplate.update(insertQuery);
     }
 }
