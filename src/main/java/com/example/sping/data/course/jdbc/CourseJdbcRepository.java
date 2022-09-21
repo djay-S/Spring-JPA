@@ -2,6 +2,7 @@ package com.example.sping.data.course.jdbc;
 
 import com.example.sping.data.course.Course;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -25,6 +26,13 @@ public class CourseJdbcRepository {
     }
 
     public Course selectCourseByCourseId(int courseId) {
-        return springJdbcTemplate.queryForObject("select * from course where id = ?", new BeanPropertyRowMapper<>(Course.class), courseId);
+        Course course = null;
+        try {
+            course = springJdbcTemplate.queryForObject("select * from course where id = ?", new BeanPropertyRowMapper<>(Course.class), courseId);
+        }
+        catch (DataAccessException e) {
+            System.out.printf("Exception thrown for courseId:%d, : %s%n", courseId, e.getLocalizedMessage());
+        }
+        return course;
     }
 }
